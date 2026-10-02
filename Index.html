@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bhupi | Video Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#12102A;--panel:#1E1B3A;--violet:#8B7CFF;--coral:#FF5A5F;--text:#EDEBFF;--muted:#8A86A8;--line:#2E2A55;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12102A}}
+:root[data-theme="dark"]{--bg:#12102A}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+h1,h2,h3{font-family:Unbounded,system-ui,sans-serif;line-height:1.1;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+section{padding:72px 0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+nav b{font-family:Unbounded,sans-serif;font-weight:700}
+nav a{text-decoration:none;color:var(--muted);margin-left:22px;font-size:15px}
+nav a:hover{color:var(--text)}
+
+/* Hero */
+.hero{padding:40px 0 56px}
+.hero h1{font-size:clamp(34px,7vw,72px);font-weight:700;max-width:14ch}
+.hero p{max-width:52ch;color:var(--muted);margin:22px 0 28px;font-size:19px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;text-decoration:none;font-weight:700;background:var(--violet);color:#12102A;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:transparent;border:1.5px solid var(--violet);color:var(--text)}
+.btn.alt:hover{border-color:var(--coral)}
+
+/* Timeline graphic: the one orchestrated moment */
+.tl{margin-top:48px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 16px 18px;position:relative;overflow:hidden}
+.tl-row{display:flex;align-items:center;gap:10px;margin:8px 0}
+.tl-row i{font-style:normal;color:var(--muted);font-size:12px;width:26px;flex:none}
+.tl-track{position:relative;flex:1;height:34px;background:#171433;border-radius:6px;overflow:hidden}
+.clip{position:absolute;top:3px;bottom:3px;border-radius:5px;padding:0 10px;font-size:12px;font-weight:700;display:flex;align-items:center;color:#12102A;white-space:nowrap;overflow:hidden;transform-origin:left;animation:clipin .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d)*1s)}
+.c1{background:var(--violet)}.c2{background:#B7ADFF}.c3{background:#6A5BE0;color:var(--text)}.c4{background:var(--coral);color:#fff}
+.wave{background:repeating-linear-gradient(90deg,var(--violet) 0 2px,transparent 2px 6px);opacity:.55;color:transparent}
+.playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--coral);left:52px;animation:sweep 8s linear 1.2s infinite;box-shadow:0 0 12px var(--coral)}
+.playhead::before{content:"";position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:9px solid var(--coral);border-bottom:0}
+@keyframes clipin{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+@keyframes sweep{from{left:52px}to{left:calc(100% - 18px)}}
+
+/* Looping reel strip */
+.reel{overflow:hidden;padding:0 0 8px}
+.reel-in{display:flex;gap:16px;width:max-content;animation:slide 40s linear infinite}
+.reel:hover .reel-in{animation-play-state:paused}
+.frame{width:300px;aspect-ratio:16/9;border-radius:12px;position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);flex:none}
+.frame video,.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.gfx{position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,var(--violet),var(--bg),var(--coral),var(--bg),var(--violet));opacity:.35;animation:spin 12s linear infinite;transform:scale(2)}
+.frame span{position:absolute;left:12px;bottom:10px;font-size:13px;color:var(--muted)}
+@keyframes slide{to{transform:translateX(calc(-50% - 8px))}}
+@keyframes spin{to{transform:scale(2) rotate(360deg)}}
+
+/* About */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.about h2,.work-h h2,.contact h2{font-size:clamp(26px,4vw,40px)}
+.about p{color:var(--muted);margin:16px 0 0}
+.big{font-family:Unbounded,sans-serif;font-size:64px;font-weight:700;color:var(--violet);line-height:1}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.chip{padding:8px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:15px}
+.chip.main{border-color:var(--violet)}
+
+/* Services */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:32px}
+.svc div{padding:22px;border-left:3px solid var(--violet);background:var(--panel);border-radius:0 12px 12px 0}
+.svc div:nth-child(even){border-left-color:var(--coral)}
+.svc h3{font-size:17px;margin-bottom:8px}
+.svc p{margin:0;color:var(--muted);font-size:15px}
+
+/* Work */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-top:32px}
+.card{text-decoration:none;display:block}
+.card .frame{width:100%}
+.card:hover .frame{border-color:var(--coral)}
+.play{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px;border-radius:50%;background:var(--coral);display:grid;place-items:center;transition:transform .2s}
+.play::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.card:hover .play{transform:scale(1.12)}
+.card h3{font-size:16px;margin:14px 0 4px;font-family:Manrope,sans-serif;font-weight:700}
+.card p{margin:0;color:var(--muted);font-size:14px}
+
+/* Contact */
+.contact{text-align:center;border-top:1px solid var(--line)}
+.contact p{color:var(--muted);max-width:44ch;margin:14px auto 28px}
+.links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 32px}
+
+@media (max-width:760px){.about{grid-template-columns:1fr;gap:28px}.tl-row i{display:none}section{padding:52px 0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav><b>Bhupi</b><div><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+
+  <header class="hero">
+    <h1>I cut videos people finish watching.</h1>
+    <p>Video editor in Chennai. Three years of cutting documentaries, talking heads, story-driven videos and reels, with motion graphics that keep the pace tight.</p>
+    <div class="btns"><a class="btn" href="#work">Watch my work</a><a class="btn alt" href="#contact">Hire me</a></div>
+
+    <div class="tl" aria-hidden="true">
+      <div class="playhead"></div>
+      <div class="tl-row"><i>V2</i><div class="tl-track">
+        <div class="clip c4" style="left:6%;width:18%;--d:.2">Lower third</div>
+        <div class="clip c3" style="left:34%;width:22%;--d:.4">Motion graphic</div>
+        <div class="clip c4" style="left:70%;width:20%;--d:.6">Title card</div></div></div>
+      <div class="tl-row"><i>V1</i><div class="tl-track">
+        <div class="clip c1" style="left:0;width:28%;--d:.3">Talking head</div>
+        <div class="clip c2" style="left:29%;width:24%;--d:.5">B-roll</div>
+        <div class="clip c1" style="left:54%;width:20%;--d:.7">Interview</div>
+        <div class="clip c2" style="left:75%;width:25%;--d:.9">Reel cut</div></div></div>
+      <div class="tl-row"><i>A1</i><div class="tl-track"><div class="clip c1 wave" style="left:0;width:100%;--d:.5">audio</div></div></div>
+    </div>
+  </header>
+</div>
+
+<!-- Looping reel. To use real clips, replace each <div class="gfx"> with:
+     <video src="YOUR_FILE.mp4" autoplay muted loop playsinline></video> -->
+<div class="reel" aria-label="Reel of edited videos" id="reel"><div class="reel-in" id="reelIn"></div></div>
+
+<div class="wrap">
+  <section id="about">
+    <div class="about">
+      <div>
+        <div class="big">3 years</div>
+        <h2 style="margin-top:14px">Editing for people who care how it feels.</h2>
+        <p>I've cut for YouTubers, artists, events and weddings. I know when a shot should breathe and when it should snap, and I build the motion graphics to match.</p>
+        <p>Worked with Royal Grand Events and RYA Metro Hall.</p>
+      </div>
+      <div>
+        <h3 style="font-size:20px">Tools I'm expert in</h3>
+        <div class="skills"><span class="chip main">Adobe After Effects</span><span class="chip main">Adobe Premiere Pro</span><span class="chip">Motion graphics</span><span class="chip">Color and sound</span><span class="chip">Pacing and retention</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <h2 style="font-size:clamp(26px,4vw,40px)">What I edit</h2>
+    <div class="svc">
+      <div><h3>Documentary style</h3><p>Long-form stories with structure, interviews and archive that hold attention.</p></div>
+      <div><h3>Talking head</h3><p>Clean cuts, tight jump cuts, captions and visuals that support the speaker.</p></div>
+      <div><h3>Storytelling videos</h3><p>Narrative edits where music, pacing and visuals carry the emotion.</p></div>
+      <div><h3>Reels and shorts</h3><p>Fast, hook-first vertical edits with motion graphics built for retention.</p></div>
+    </div>
+  </section>
+
+  <section id="work" style="padding-top:0">
+    <div class="work-h"><h2>Videos I've edited</h2></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Have a video to cut?</h2>
+    <p>Send me the footage and a few lines on what you want. I'll reply with a plan and a quote.</p>
+    <div class="links">
+      <a class="btn" href="mailto:youremail@example.com">youremail@example.com</a>
+      <a class="btn alt" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn alt" href="https://youtube.com/@meibhupi" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </section>
+  <footer>Bhupi · Video editor · Chennai</footer>
+</div>
+
+<script>
+// EDIT HERE: paste your edited YouTube video links and titles.
+const VIDEOS=[
+ {title:"Video title 1",tag:"Documentary",url:"https://youtube.com/watch?v=VIDEO_ID_1"},
+ {title:"Video title 2",tag:"Talking head",url:"https://youtube.com/watch?v=VIDEO_ID_2"},
+ {title:"Video title 3",tag:"Storytelling",url:"https://youtube.com/watch?v=VIDEO_ID_3"},
+ {title:"Video title 4",tag:"Reel",url:"https://youtube.com/watch?v=VIDEO_ID_4"},
+ {title:"Video title 5",tag:"Motion graphics",url:"https://youtube.com/watch?v=VIDEO_ID_5"},
+ {title:"Video title 6",tag:"YouTuber edit",url:"https://youtube.com/watch?v=VIDEO_ID_6"}
+];
+// Thumbnails: add thumb:"data:image/jpeg;base64,..." to a video above to replace the animated placeholder.
+document.getElementById("grid").innerHTML=VIDEOS.map(v=>
+ `<a class="card" href="${v.url}" target="_blank" rel="noopener"><div class="frame">${v.thumb?`<img src="${v.thumb}" alt="">`:'<div class="gfx"></div>'}<div class="play"></div></div><h3>${v.title}</h3><p>${v.tag}</p></a>`).join("");
+const labels=["Documentary","Talking head","Reel","Story","Motion graphics","Event film","Wedding film","YouTuber edit"];
+const f=labels.map(l=>`<div class="frame"><div class="gfx" style="animation-delay:-${Math.random()*10}s"></div><span>${l}</span></div>`).join("");
+document.getElementById("reelIn").innerHTML=f+f;
+</script>
+</body>
+</html>
