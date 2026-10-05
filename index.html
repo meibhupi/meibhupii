@@ -226,6 +226,7 @@ document.querySelectorAll(".frame.yt").forEach(f=>{
   fr.addEventListener("load",()=>fr.contentWindow.postMessage(JSON.stringify({event:"listening",id:1}),"*"));
   if(window.vidStarted)window.vidStarted(f);
  };
+f.addEventListener("click",go);
  f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
 });
 (function(){
