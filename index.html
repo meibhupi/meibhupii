@@ -184,9 +184,15 @@ function ytId(u){const m=u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})
 document.getElementById("grid").innerHTML=VIDEOS.map(v=>{
  const id=ytId(v.url);
  const t=v.thumb||(id?`https://img.youtube.com/vi/${id}/hqdefault.jpg`:"");
- return `<a class="card" href="${v.url}" target="_blank" rel="noopener"><div class="frame">${t?`<img src="${t}" alt="">`:'<div class="gfx"></div>'}<div class="play"></div></div><h3>${v.title}</h3><p>${v.tag}</p></a>`}).join("");
-const labels=["Documentary","Talking head","Reel","Story","Motion graphics","Event film","Wedding film","YouTuber edit"];
-const f=labels.map(l=>`<div class="frame"><div class="gfx" style="animation-delay:-${Math.random()*10}s"></div><span>${l}</span></div>`).join("");
+ const img=t?`<img src="${t}" alt="">`:'<div class="gfx"></div>';
+ if(id)return `<div class="card"><div class="frame yt" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div><h3>${v.title}</h3><p>${v.tag}</p></div>`;
+ return `<a class="card" href="${v.url}" target="_blank" rel="noopener"><div class="frame">${img}<div class="play"></div></div><h3>${v.title}</h3><p>${v.tag}</p></a>`}).join("");
+document.querySelectorAll(".frame.yt").forEach(f=>{
+ f.style.cursor="pointer";
+ const go=()=>{f.innerHTML=`<iframe src="https://www.youtube.com/embed/${f.dataset.id}?autoplay=1&rel=0" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>`};
+ f.addEventListener("click",go);
+ f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+});
 document.getElementById("reelIn").innerHTML=f+f;
 </script>
 </body>
