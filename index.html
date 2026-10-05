@@ -1,5 +1,5 @@
  <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-palette="orange">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,8 +10,13 @@
 <style>
 :root{--bg:#12102A;--panel:#1E1B3A;--violet:#8B7CFF;--coral:#FF5A5F;--text:#EDEBFF;--muted:#8A86A8;--line:#2E2A55;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12102A}}
-:root[data-theme="dark"]{--bg:#12102A}
+/* Palettes: change data-palette on the <html> tag at the top to: indigo, royal, funky, bright, gold or orange */
+:root{--track:#171433;--ink:#12102A;--lightink:#12102A;--light:#B7ADFF;--deep:#6A5BE0;--deeptx:#EDEBFF;--hotink:#fff}
+[data-palette="royal"]{--bg:#0A0F3D;--panel:#141B5C;--violet:#F2C14E;--coral:#E8315F;--text:#F6F3E7;--muted:#9BA5DA;--line:#27318A;--track:#0D1450;--ink:#0A0F3D;--lightink:#0A0F3D;--light:#FFE29A;--deep:#2E48D6;--deeptx:#fff;--hotink:#fff}
+[data-palette="funky"]{--bg:#1A0B2E;--panel:#2A1247;--violet:#FF3EA5;--coral:#00E5C3;--text:#FFF0FB;--muted:#BC9BDB;--line:#4B2478;--track:#140826;--ink:#1A0B2E;--lightink:#1A0B2E;--light:#FFB4DD;--deep:#B3126B;--deeptx:#fff;--hotink:#1A0B2E}
+[data-palette="gold"]{--bg:#4D2A00;--panel:#613700;--violet:#F2A900;--coral:#CC6F00;--text:#F9E6A8;--muted:#CDB179;--line:#7A4A0E;--track:#3A1F00;--ink:#4D2A00;--lightink:#4D2A00;--light:#F9E6A8;--deep:#8F4D00;--deeptx:#F9E6A8;--hotink:#fff}
+[data-palette="orange"]{--bg:#17101F;--panel:#251A33;--violet:#FF7A1A;--coral:#FFC83D;--text:#FFF1E6;--muted:#B7A4C2;--line:#3D2B52;--track:#100B17;--ink:#17101F;--lightink:#17101F;--light:#FFB27A;--deep:#C44A00;--deeptx:#fff;--hotink:#17101F}
+[data-palette="bright"]{color-scheme:light;--bg:#F3F6FF;--panel:#FFFFFF;--violet:#2F54FF;--coral:#F25A00;--text:#0F1540;--muted:#5A6190;--line:#D3DAF5;--track:#E3E9FF;--ink:#fff;--lightink:#0F1540;--light:#A9BBFF;--deep:#1B34C7;--deeptx:#fff;--hotink:#fff}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden}
@@ -31,7 +36,7 @@ nav a:hover{color:var(--text)}
 .hero h1{font-size:clamp(34px,7vw,72px);font-weight:700;max-width:14ch}
 .hero p{max-width:52ch;color:var(--muted);margin:22px 0 28px;font-size:19px}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;padding:13px 24px;border-radius:999px;text-decoration:none;font-weight:700;background:var(--violet);color:#12102A;transition:transform .2s}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;text-decoration:none;font-weight:700;background:var(--violet);color:var(--ink);transition:transform .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn.alt{background:transparent;border:1.5px solid var(--violet);color:var(--text)}
 .btn.alt:hover{border-color:var(--coral)}
@@ -40,9 +45,9 @@ nav a:hover{color:var(--text)}
 .tl{margin-top:48px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 16px 18px;position:relative;overflow:hidden}
 .tl-row{display:flex;align-items:center;gap:10px;margin:8px 0}
 .tl-row i{font-style:normal;color:var(--muted);font-size:12px;width:26px;flex:none}
-.tl-track{position:relative;flex:1;height:34px;background:#171433;border-radius:6px;overflow:hidden}
-.clip{position:absolute;top:3px;bottom:3px;border-radius:5px;padding:0 10px;font-size:12px;font-weight:700;display:flex;align-items:center;color:#12102A;white-space:nowrap;overflow:hidden;transform-origin:left;animation:clipin .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d)*1s)}
-.c1{background:var(--violet)}.c2{background:#B7ADFF}.c3{background:#6A5BE0;color:var(--text)}.c4{background:var(--coral);color:#fff}
+.tl-track{position:relative;flex:1;height:34px;background:var(--track);border-radius:6px;overflow:hidden}
+.clip{position:absolute;top:3px;bottom:3px;border-radius:5px;padding:0 10px;font-size:12px;font-weight:700;display:flex;align-items:center;color:var(--ink);white-space:nowrap;overflow:hidden;transform-origin:left;animation:clipin .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d)*1s)}
+.c1{background:var(--violet)}.c2{background:var(--light);color:var(--lightink)}.c3{background:var(--deep);color:var(--deeptx)}.c4{background:var(--coral);color:var(--hotink)}
 .wave{background:repeating-linear-gradient(90deg,var(--violet) 0 2px,transparent 2px 6px);opacity:.55;color:transparent}
 .playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--coral);left:52px;animation:sweep 8s linear 1.2s infinite;box-shadow:0 0 12px var(--coral)}
 .playhead::before{content:"";position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:9px solid var(--coral);border-bottom:0}
@@ -82,7 +87,7 @@ nav a:hover{color:var(--text)}
 .card .frame{width:100%}
 .card:hover .frame{border-color:var(--coral)}
 .play{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px;border-radius:50%;background:var(--coral);display:grid;place-items:center;transition:transform .2s}
-.play::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.play::after{content:"";border-left:16px solid var(--hotink);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
 .card:hover .play{transform:scale(1.12)}
 .card h3{font-size:16px;margin:14px 0 4px;font-family:Manrope,sans-serif;font-weight:700}
 .card p{margin:0;color:var(--muted);font-size:14px}
@@ -95,8 +100,20 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 32px}
 
 @media (max-width:760px){.about{grid-template-columns:1fr;gap:28px}.tl-row i{display:none}section{padding:52px 0}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
- .frame.v{aspect-ratio:9/16;max-width:340px;margin:0 auto}
+.frame.v{aspect-ratio:9/16}
 .frame.v video{object-fit:contain;background:#000}
+.grid{grid-template-columns:repeat(3,1fr);gap:14px;grid-auto-flow:dense}
+.card.wide{grid-column:1/-1}
+.card.vc h3{font-size:13px;margin-top:10px}
+.card.vc p{font-size:12px}
+.card.vc .frame{border-radius:10px}
+.card.vc .play{width:40px;height:40px;margin:-20px}
+.card.vc .play::after{border-left-width:11px;border-top-width:7px;border-bottom-width:7px;margin-left:3px}
+.card.vc video{object-fit:cover}
+.card.wide .frame{max-width:560px}
+.reel .frame{width:170px;aspect-ratio:9/16;border-radius:14px}
+.reel .frame video,.reel .frame img{object-fit:cover}
+.reel-in{gap:14px}
 </style>
 </head>
 <body>
@@ -178,31 +195,39 @@ const VIDEOS=[
  {title:"Video title 1",tag:"Documentary",url:"https://youtu.be/SRAkcoCLwC0?si=TcrSeq40DR5BDiri"},
  {title:"Video title 2",tag:"Talking head",url:"https://youtube.com/watch?v=VIDEO_ID_2"},
  {title:"Video title 3",tag:"Storytelling",url:"https://youtube.com/watch?v=VIDEO_ID_3"},
- {title:"My reel title",tag:"Reel",url:"https://www.instagram.com/reel/DU3fh8nElV4/?stkn=d2ZnNmNkcXpkMmhs",thumb:"file_00000000147c8211823106728b21190e.png"},
+ {title:"My reel title",tag:"Reel",url:"https://www.instagram.com/reel/DU3fh8nElV4/?stkn=d2ZnNmNkcXpkMmhs",thumb:"file_00000000147c8211823106728b21190e.png",vertical:true},
  {title:"Video title 5",tag:"Motion graphics",url:"anuvjain.bhupi%20(1).mp4",vertical:true},
- {title:"Video title 6",tag:"YouTuber edit",url:"https://youtube.com/watch?v=VIDEO_ID_6"}
+ {title:"Video title 6",tag:"YouTuber edit",url:"https://youtube.com/watch?v=VIDEO_ID_6",vertical:true},
+ {title:"Video title 7",tag:"Reel",url:"https://youtube.com/watch?v=VIDEO_ID_7",vertical:true},
+ {title:"Video title 8",tag:"Reel",url:"https://youtube.com/watch?v=VIDEO_ID_8",vertical:true},
+ {title:"Video title 9",tag:"Reel",url:"https://youtube.com/watch?v=VIDEO_ID_9",vertical:true},
+ {title:"Video title 10",tag:"Reel",url:"https://youtube.com/watch?v=VIDEO_ID_10",vertical:true},
+ {title:"Video title 11",tag:"Reel",url:"https://youtube.com/watch?v=VIDEO_ID_11",vertical:true},
+ {title:"Video title 12",tag:"Reel",url:"https://youtube.com/watch?v=VIDEO_ID_12",vertical:true}
 ];
 function ytId(u){const m=u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/);return m?m[1]:null}
 document.getElementById("grid").innerHTML=VIDEOS.map(v=>{
  const id=ytId(v.url);
+ const cc=v.vertical?"card vc":"card wide",vf=v.vertical?" v":"";
  const meta=`<h3>${v.title}</h3><p>${v.tag}</p>`;
- if(/\.mp4(\?|#|$)/i.test(v.url))return `<div class="card"><div class="frame${v.vertical?' v':''}"><video src="${v.url}#t=0.1" controls playsinline preload="metadata"${v.thumb?` poster="${v.thumb}"`:""}></video></div>${meta}</div>`;
+ if(/\.mp4(\?|#|$)/i.test(v.url))return `<div class="${cc}"><div class="frame${vf}"><video src="${v.url}#t=0.1" controls playsinline preload="metadata"${v.thumb?` poster="${v.thumb}"`:""}></video></div>${meta}</div>`;
  const t=v.thumb||(id?`https://img.youtube.com/vi/${id}/hqdefault.jpg`:"");
  const img=t?`<img src="${t}" alt="">`:'<div class="gfx"></div>';
- if(id)return `<div class="card"><div class="frame yt" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div>${meta}</div>`;
- return `<a class="card" href="${v.url}" target="_blank" rel="noopener"><div class="frame">${img}<div class="play"></div></div>${meta}</a>`}).join("");
+ if(id)return `<div class="${cc}"><div class="frame yt${vf}" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div>${meta}</div>`;
+ return `<a class="${cc}" href="${v.url}" target="_blank" rel="noopener"><div class="frame${vf}">${img}<div class="play"></div></div>${meta}</a>`}).join("");
 document.querySelectorAll(".frame.yt").forEach(f=>{
  f.style.cursor="pointer";
  const go=()=>{f.innerHTML=`<iframe src="https://www.youtube.com/embed/${f.dataset.id}?autoplay=1&rel=0" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>`};
  f.addEventListener("click",go);
  f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
 });
-// Looping strip at the top. video:"file.mp4" plays in the loop, thumb:"img.png" shows an image.
+// Looping strip at the top (vertical frames). Empty for now.
+// To add a video, change a line to: {label:"Name",video:"file.mp4"}
+// To add an image: {label:"Name",thumb:"image.png"}
+// To make it open a link when tapped, add: url:"https://..."
 const REEL=[
- {label:"Motion graphics",video:"anuvjain.bhupi%20(1).mp4"},
- {label:"My reel",thumb:"file_00000000147c8211823106728b21190e.png",url:"https://www.instagram.com/reel/DU3fh8nElV4/?stkn=d2ZnNmNkcXpkMmhs"},
- {label:"Documentary"},
- {label:"Talking head"}
+ {label:"Reel 1"},{label:"Reel 2"},{label:"Reel 3"},{label:"Reel 4"},
+ {label:"Reel 5"},{label:"Reel 6"},{label:"Reel 7"},{label:"Reel 8"}
 ];
 const one=REEL.map(r=>{
  const media=r.video?`<video src="${r.video}#t=0.1" autoplay muted loop playsinline preload="metadata"></video>`:r.thumb?`<img src="${r.thumb}" alt="">`:'<div class="gfx"></div>';
@@ -213,3 +238,4 @@ document.getElementById("reelIn").innerHTML=base+base;
 </script>
 </body>
 </html>
+
