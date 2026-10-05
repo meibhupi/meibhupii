@@ -170,30 +170,44 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 32px}
 </div>
 
 <script>
-// EDIT HERE: paste your edited YouTube video links and titles.
+// EDIT HERE: paste your edited video links and titles.
+// YouTube links play on the site. .mp4 files play on the site. Instagram links open Instagram.
 const VIDEOS=[
  {title:"Video title 1",tag:"Documentary",url:"https://youtu.be/SRAkcoCLwC0?si=TcrSeq40DR5BDiri"},
  {title:"Video title 2",tag:"Talking head",url:"https://youtube.com/watch?v=VIDEO_ID_2"},
  {title:"Video title 3",tag:"Storytelling",url:"https://youtube.com/watch?v=VIDEO_ID_3"},
  {title:"My reel title",tag:"Reel",url:"https://www.instagram.com/reel/DU3fh8nElV4/?stkn=d2ZnNmNkcXpkMmhs",thumb:"file_00000000147c8211823106728b21190e.png"},
- {title:"Video title 5",tag:"Motiongraphics""anuvjain.bhupi (1).mp4"},
+ {title:"Video title 5",tag:"Motion graphics",url:"anuvjain.bhupi%20(1).mp4"},
  {title:"Video title 6",tag:"YouTuber edit",url:"https://youtube.com/watch?v=VIDEO_ID_6"}
 ];
-// Thumbnails: add thumb:"data:image/jpeg;base64,..." to a video above to replace the animated placeholder
 function ytId(u){const m=u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/);return m?m[1]:null}
 document.getElementById("grid").innerHTML=VIDEOS.map(v=>{
  const id=ytId(v.url);
+ const meta=`<h3>${v.title}</h3><p>${v.tag}</p>`;
+ if(/\.mp4(\?|#|$)/i.test(v.url))return `<div class="card"><div class="frame"><video src="${v.url}#t=0.1" controls playsinline preload="metadata"${v.thumb?` poster="${v.thumb}"`:""}></video></div>${meta}</div>`;
  const t=v.thumb||(id?`https://img.youtube.com/vi/${id}/hqdefault.jpg`:"");
  const img=t?`<img src="${t}" alt="">`:'<div class="gfx"></div>';
- if(id)return `<div class="card"><div class="frame yt" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div><h3>${v.title}</h3><p>${v.tag}</p></div>`;
- return `<a class="card" href="${v.url}" target="_blank" rel="noopener"><div class="frame">${img}<div class="play"></div></div><h3>${v.title}</h3><p>${v.tag}</p></a>`}).join("");
+ if(id)return `<div class="card"><div class="frame yt" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div>${meta}</div>`;
+ return `<a class="card" href="${v.url}" target="_blank" rel="noopener"><div class="frame">${img}<div class="play"></div></div>${meta}</a>`}).join("");
 document.querySelectorAll(".frame.yt").forEach(f=>{
  f.style.cursor="pointer";
  const go=()=>{f.innerHTML=`<iframe src="https://www.youtube.com/embed/${f.dataset.id}?autoplay=1&rel=0" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>`};
  f.addEventListener("click",go);
  f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
 });
-document.getElementById("reelIn").innerHTML=f+f;
+// Looping strip at the top. video:"file.mp4" plays in the loop, thumb:"img.png" shows an image.
+const REEL=[
+ {label:"Motion graphics",video:"anuvjain.bhupi%20(1).mp4"},
+ {label:"My reel",thumb:"file_00000000147c8211823106728b21190e.png",url:"https://www.instagram.com/reel/DU3fh8nElV4/?stkn=d2ZnNmNkcXpkMmhs"},
+ {label:"Documentary"},
+ {label:"Talking head"}
+];
+const one=REEL.map(r=>{
+ const media=r.video?`<video src="${r.video}#t=0.1" autoplay muted loop playsinline preload="metadata"></video>`:r.thumb?`<img src="${r.thumb}" alt="">`:'<div class="gfx"></div>';
+ const inner=`${media}<span>${r.label}</span>`;
+ return r.url?`<a class="frame" style="display:block" href="${r.url}" target="_blank" rel="noopener">${inner}</a>`:`<div class="frame">${inner}</div>`}).join("");
+const base=one.repeat(Math.ceil(8/REEL.length));
+document.getElementById("reelIn").innerHTML=base+base;
 </script>
 </body>
 </html>
