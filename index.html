@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en" data-palette="orange">
 <head>
 <meta charset="utf-8">
@@ -185,6 +185,406 @@ filter:drop-shadow(0 0 18px color-mix(in srgb,var(--violet) 55%,transparent));
 animation:sweep3 3.2s ease-in-out infinite,glow3 2.4s ease-in-out infinite alternate}
 @keyframes sweep3{0%{background-position:150% 0,0 0}60%,100%{background-position:-60% 0,0 0}}
 @keyframes glow3{to{filter:drop-shadow(0 0 30px color-mix(in srgb,var(--coral) 75%,transparent))}}
+/* Play button hidden on video thumbnails (tap still plays) */
+.card .play{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav><b>Bhupi</b><div><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+
+  <header class="hero">
+    <h1 class="sr">Bhupi, video editor</h1>
+    <!-- HERO CUTOUT (transparent video loop).
+         Export from After Effects / Premiere with alpha, then name the files:
+           hero.webm  = VP9 with alpha (Chrome, Edge, Firefox, Android)
+           hero.mov   = HEVC with alpha (Safari, iPhone, Mac)
+         Put both in the same folder as this index.html.
+         Or use a single PNG instead: <img src="hero.png" alt="Bhupi"> -->
+    <div class="hero-video"><i class="hv-head"></i>
+      <!-- STAND-IN ANIMATION (preview only). When your real cutout is ready: delete this whole <svg>, then uncomment the <video> below.
+      <video class="cutout" autoplay muted loop playsinline preload="auto" disablepictureinpicture>
+        <source src="hero.mov" type='video/mp4; codecs="hvc1"'>
+        <source src="hero.webm" type="video/webm">
+      </video> -->
+      <svg class="cutout standin" viewBox="0 0 640 360" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <g class="fig">
+          <g class="arm"><path d="M418 300 L470 362" stroke="#C44A00" stroke-width="34" stroke-linecap="round"/><circle cx="474" cy="368" r="19" fill="#E8B48F"/></g>
+          <path d="M196 362 C196 292 248 262 320 262 C392 262 444 292 444 362Z" fill="var(--violet)"/>
+          <path d="M290 262 Q320 292 350 262" fill="none" stroke="#C44A00" stroke-width="5" stroke-linecap="round"/>
+          <rect x="302" y="222" width="36" height="46" rx="14" fill="#D9A07C"/>
+          <g class="head">
+            <ellipse cx="268" cy="180" rx="9" ry="14" fill="#E8B48F"/><ellipse cx="372" cy="180" rx="9" ry="14" fill="#E8B48F"/>
+            <ellipse cx="320" cy="176" rx="52" ry="60" fill="#E8B48F"/>
+            <path d="M266 160 C262 108 300 98 326 102 C362 98 382 126 374 160 C362 140 344 132 322 134 C298 134 276 142 266 160Z" fill="#1B1322"/>
+            <g class="brows" stroke="#1B1322" stroke-width="5" stroke-linecap="round"><path d="M290 156 L312 154"/><path d="M328 154 L350 156"/></g>
+            <g class="eyes" fill="#1B1322"><ellipse cx="300" cy="174" rx="5.5" ry="7"/><ellipse cx="340" cy="174" rx="5.5" ry="7"/></g>
+            <ellipse cx="288" cy="196" rx="9" ry="5" fill="#FF8F7A" opacity=".45"/><ellipse cx="352" cy="196" rx="9" ry="5" fill="#FF8F7A" opacity=".45"/>
+            <g class="m m1"><path d="M304 200 Q320 214 336 200" fill="none" stroke="#1B1322" stroke-width="5" stroke-linecap="round"/></g>
+            <g class="m m2"><ellipse cx="320" cy="205" rx="8" ry="10" fill="#1B1322"/></g>
+            <g class="m m3"><path d="M298 196 Q320 200 342 196 Q338 224 320 224 Q302 224 298 196Z" fill="#1B1322"/><path d="M308 214 Q320 208 332 214 Q326 222 320 222 Q314 222 308 214Z" fill="#FF6B7A"/></g>
+            <g class="m m4"><path d="M308 204 L332 204" stroke="#1B1322" stroke-width="5" stroke-linecap="round"/></g>
+          </g>
+        </g>
+        <g font-family="Unbounded,sans-serif" font-weight="700" text-anchor="middle">
+          <text class="e e1" x="428" y="128" font-size="46" fill="var(--coral)">!</text>
+          <text class="e e2" x="214" y="128" font-size="46" fill="var(--coral)">?</text>
+          <text class="e e3" x="236" y="150" font-size="34" fill="var(--coral)">&#10022;</text>
+          <text class="e e3 d2" x="412" y="108" font-size="26" fill="var(--light)">&#10022;</text>
+          <text class="e e3 d3" x="440" y="170" font-size="30" fill="var(--coral)">&#9829;</text>
+        </g>
+      </svg>
+    </div>
+
+    <p>Video editor in Chennai. Three years of cutting documentaries, talking heads, story-driven videos and reels, with motion graphics that keep the pace tight.</p>
+    <div class="btns"><a class="btn" href="#work">Watch my work</a><a class="btn alt" href="#contact">Hire me</a></div>
+
+    <div class="tl" aria-hidden="true">
+      <div class="playhead"></div>
+      <div class="tl-row"><i>V2</i><div class="tl-track">
+        <div class="clip c4" style="left:6%;width:18%;--d:.2">Lower third</div>
+        <div class="clip c3" style="left:34%;width:22%;--d:.4">Motion graphic</div>
+        <div class="clip c4" style="left:70%;width:20%;--d:.6">Title card</div></div></div>
+      <div class="tl-row"><i>V1</i><div class="tl-track">
+        <div class="clip c1" style="left:0;width:28%;--d:.3">Talking head</div>
+        <div class="clip c2" style="left:29%;width:24%;--d:.5">B-roll</div>
+        <div class="clip c1" style="left:54%;width:20%;--d:.7">Interview</div>
+        <div class="clip c2" style="left:75%;width:25%;--d:.9">Reel cut</div></div></div>
+      <div class="tl-row"><i>A1</i><div class="tl-track"><div class="clip c1 wave" style="left:0;width:100%;--d:.5">audio</div></div></div>
+    </div>
+  </header>
+</div>
+
+<!-- Looping reel. To use real clips, replace each <div class="gfx"> with:
+     <video src="YOUR_FILE.mp4" autoplay muted loop playsinline></video> -->
+<div class="reel" aria-label="Reel of edited videos" id="reel"><div class="reel-in" id="reelIn"></div></div>
+
+<div class="wrap">
+  <section id="about">
+    <div class="about">
+      <div>
+        <div class="big">3 years</div>
+        <h2 style="margin-top:14px">Editing for people who care how it feels.</h2>
+        <p>I've cut for YouTubers, artists, events and weddings. I know when a shot should breathe and when it should snap, and I build the motion graphics to match.</p>
+      </div>
+      <div>
+        <h3 style="font-size:20px">Tools I'm expert in</h3>
+        <div class="skills"><span class="chip main">Adobe After Effects</span><span class="chip main">Adobe Premiere Pro</span><span class="chip">Motion graphics</span><span class="chip">Color and sound</span><span class="chip">Pacing and retention</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <h2 style="font-size:clamp(26px,4vw,40px)">What I edit</h2>
+    <div class="svc">
+      <div><h3>Documentary style</h3><p>Long-form stories with structure, interviews and archive that hold attention.</p></div>
+      <div><h3>Talking head</h3><p>Clean cuts, tight jump cuts, captions and visuals that support the speaker.</p></div>
+      <div><h3>Storytelling videos</h3><p>Narrative edits where music, pacing and visuals carry the emotion.</p></div>
+      <div><h3>Reels and shorts</h3><p>Fast, hook-first vertical edits with motion graphics built for retention.</p></div>
+    </div>
+  </section>
+
+  <section id="work" style="padding-top:0">
+    <div class="work-h"><h2>Videos I've edited</h2></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Have a video to cut?</h2>
+    <p>Send me the footage and a few lines on what you want. I'll reply with a plan and a quote.</p>
+    <div class="links">
+      <a class="btn" href="mailto:meibhupi@gmail.com">EMAIL</a>
+      <a class="btn alt" href="https://www.instagram.com/bhupifx?stkn=NGdod21uZjh4aGl1" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn alt" href="https://youtube.com/@meibhupi?si=5eRcYmCy4sHv7A6v" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </section>
+  <footer>Bhupi · Video editor · Chennai</footer>
+</div>
+
+<script>
+// EDIT HERE: paste your edited video links and titles.
+// YouTube links play on the site. .mp4 files play on the site. Instagram links open Instagram.
+const VIDEOS=[
+ {title:"Video title 1",tag:"Documentary",url:"https://youtu.be/SRAkcoCLwC0?si=TcrSeq40DR5BDiri"},
+ {title:"Video title 2",tag:"Talking head",url:"https://youtube.com/watch?v=VIDEO_ID_2"},
+ {title:"Video title 3",tag:"Storytelling",url:"https://youtube.com/watch?v=VIDEO_ID_3"},
+ {title:"flex art posters 4",tag:"unboxing",url:"mei bhupi (1).mp4",thumb:"Unbox thum.png",vertical:true},
+ {title:"Video title 5",tag:"Motion graphics",url:"anuvjain.bhupi%20(1).mp4",thumb:"Anuv thum.png",vertical:true},
+ {title:"Video title 6",tag:"YouTuber edit",url:"Rrs.mp4",thumb:"Rrs thm.png",vertical:true},
+ {title:"Video title 7",tag:"Reel",url:"Tinder Founder on How Swiping Changed Dating Forever [_M76pNDLzeg]_1_4.mp4",thumb:"Pod thum.png",vertical:true},
+ {title:"Video title 8",tag:"Reel",url:"3.mp4",thumb:"file_00000000d8ec8210a5125cff336f3f4d.png",vertical:true},
+ {title:"Video title 9",tag:"Reel",url:"SaveVid.Net_AQMNZryTio6u7QngR6Vl0ujjJT6Fd-Ykbz8g5ZhMivuQkACeDiN1USnXqeHONl5ld5nXYsWc3ILkzS9noZ4VTWMZWajZAeJ1QzJZgRA.mp4",vertical:true}
+];
+const enc=u=>/%[0-9a-f]{2}/i.test(u)?u:encodeURI(u);
+function ytId(u){const m=u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/);return m?m[1]:null}
+document.getElementById("grid").innerHTML=VIDEOS.map(v=>{
+ const id=ytId(v.url);
+ const cc=v.vertical?"card vc":"card wide",vf=v.vertical?" v":"";
+ const meta=`<h3>${v.title}</h3><p>${v.tag}</p>`;
+ if(/\.mp4(\?|#|$)/i.test(v.url)){const src=enc(v.url),pv=`<video src="${src}#t=0.1" muted playsinline preload="metadata" style="pointer-events:none"></video>`;return `<div class="${cc}"><div class="frame mp${vf}" data-src="${src}" role="button" tabindex="0" aria-label="Play ${v.title}">${v.thumb?`<img src="${enc(v.thumb)}" alt="">`:pv}<div class="play"></div></div>${meta}</div>`}
+ const t=v.thumb||(id?`https://img.youtube.com/vi/${id}/hqdefault.jpg`:"");
+ const img=t?`<img src="${t}" alt="">`:'<div class="gfx"></div>';
+ if(id)return `<div class="${cc}"><div class="frame yt${vf}" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div>${meta}</div>`;
+ return `<a class="${cc}" href="${v.url}" target="_blank" rel="noopener"><div class="frame${vf}">${img}<div class="play"></div></div>${meta}</a>`}).join("");
+document.querySelectorAll(".frame.mp").forEach(f=>{
+ f.style.cursor="pointer";
+ const im=f.querySelector("img");
+ if(im)im.addEventListener("error",()=>{im.outerHTML=`<video src="${f.dataset.src}#t=0.1" muted playsinline preload="metadata" style="pointer-events:none"></video>`});
+ const go=()=>{
+  if(f.querySelector("video[controls]"))return;
+  f.innerHTML=`<video src="${f.dataset.src}" controls autoplay playsinline></video>`;
+  const v=f.querySelector("video");const p=v.play();if(p&&p.catch)p.catch(()=>{});
+ };
+ f.addEventListener("click",go);
+ f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+});
+document.querySelectorAll(".frame.yt").forEach(f=>{
+ f.style.cursor="pointer";
+ const go=()=>{
+  const o=location.protocol.indexOf("http")===0?"&origin="+encodeURIComponent(location.origin):"";
+  f.innerHTML=`<iframe src="https://www.youtube.com/embed/${f.dataset.id}?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1${o}" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>`;
+  const fr=f.querySelector("iframe");
+  fr.addEventListener("load",()=>fr.contentWindow.postMessage(JSON.stringify({event:"listening",id:1}),"*"));
+  if(window.vidStarted)window.vidStarted(f);
+ };
+f.addEventListener("click",go);
+ f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+});
+(function(){
+ const grid=document.getElementById("grid");
+ const frameOf=n=>n.closest(".frame");
+ const shake=f=>{f.classList.remove("shake");void f.offsetWidth;f.classList.add("shake")};
+ const ytCmd=(f,fn)=>{const i=f.querySelector("iframe");if(i&&i.contentWindow)i.contentWindow.postMessage(JSON.stringify({event:"command",func:fn,args:[]}),"*")};
+ function pauseOthers(except){
+  grid.querySelectorAll(".frame").forEach(f=>{
+   if(f===except)return;
+   const v=f.querySelector("video");if(v&&!v.paused)v.pause();
+   ytCmd(f,"pauseVideo");
+   f.classList.remove("playing");
+  });
+ }
+ function started(f){const was=f.classList.contains("playing");pauseOthers(f);f.classList.add("playing");if(!was)shake(f)}
+ function stopped(f){f.classList.remove("playing")}
+ window.vidStarted=started;
+ grid.addEventListener("play",e=>{if(e.target.tagName==="VIDEO")started(frameOf(e.target))},true);
+ grid.addEventListener("pause",e=>{if(e.target.tagName==="VIDEO")stopped(frameOf(e.target))},true);
+ grid.addEventListener("ended",e=>{if(e.target.tagName==="VIDEO")stopped(frameOf(e.target))},true);
+ grid.addEventListener("animationend",e=>{if(e.animationName==="shake")e.target.classList.remove("shake")},true);
+ window.addEventListener("message",e=>{
+  if(typeof e.data!=="string"||e.origin.indexOf("youtube")<0)return;
+  let d;try{d=JSON.parse(e.data)}catch(_){return}
+  if(d.event!=="onStateChange")return;
+  const f=[...grid.querySelectorAll(".frame.yt")].find(x=>{const i=x.querySelector("iframe");return i&&i.contentWindow===e.source});
+  if(!f)return;
+  if(d.info===1)started(f);else if(d.info===2||d.info===0)stopped(f);
+ });
+})();
+ // Looping strip at the top (vertical frames). Empty for now.
+// To add a video, change a line to: {label:"Name",video:"file.mp4"}
+// To add an image: {label:"Name",thumb:"image.png"}
+// To make it open a link when tapped, add: url:"https://..."
+const REEL=[
+ {label:"Reel 1"},{label:"Reel 2"},{label:"Reel 3"},{label:"Reel 4"},
+ {label:"Reel 5"},{label:"Reel 6"},{label:"Reel 7"},{label:"Reel 8"}
+];
+const one=REEL.map(r=>{
+ const media=r.video?`<video src="${r.video}#t=0.1" autoplay muted loop playsinline preload="metadata"></video>`:r.thumb?`<img src="${r.thumb}" alt="">`:'<div class="gfx"></div>';
+ const inner=`${media}<span>${r.label}</span>`;
+ return r.url?`<a class="frame" style="display:block" href="${r.url}" target="_blank" rel="noopener">${inner}</a>`:`<div class="frame">${inner}</div>`}).join("");
+const base=one.repeat(Math.ceil(8/REEL.length));
+document.getElementById("reelIn").innerHTML=base+base;
+</script>
+</body>
+</html>
+ <!DOCTYPE html>
+<html lang="en" data-palette="orange">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bhupi | Video Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#12102A;--panel:#1E1B3A;--violet:#8B7CFF;--coral:#FF5A5F;--text:#EDEBFF;--muted:#8A86A8;--line:#2E2A55;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+/* Palettes: change data-palette on the <html> tag at the top to: indigo, royal, funky, bright, gold or orange */
+:root{--track:#171433;--ink:#12102A;--lightink:#12102A;--light:#B7ADFF;--deep:#6A5BE0;--deeptx:#EDEBFF;--hotink:#fff}
+[data-palette="royal"]{--bg:#0A0F3D;--panel:#141B5C;--violet:#F2C14E;--coral:#E8315F;--text:#F6F3E7;--muted:#9BA5DA;--line:#27318A;--track:#0D1450;--ink:#0A0F3D;--lightink:#0A0F3D;--light:#FFE29A;--deep:#2E48D6;--deeptx:#fff;--hotink:#fff}
+[data-palette="funky"]{--bg:#1A0B2E;--panel:#2A1247;--violet:#FF3EA5;--coral:#00E5C3;--text:#FFF0FB;--muted:#BC9BDB;--line:#4B2478;--track:#140826;--ink:#1A0B2E;--lightink:#1A0B2E;--light:#FFB4DD;--deep:#B3126B;--deeptx:#fff;--hotink:#1A0B2E}
+[data-palette="gold"]{--bg:#4D2A00;--panel:#613700;--violet:#F2A900;--coral:#CC6F00;--text:#F9E6A8;--muted:#CDB179;--line:#7A4A0E;--track:#3A1F00;--ink:#4D2A00;--lightink:#4D2A00;--light:#F9E6A8;--deep:#8F4D00;--deeptx:#F9E6A8;--hotink:#fff}
+[data-palette="orange"]{--bg:#17101F;--panel:#251A33;--violet:#FF7A1A;--coral:#FFC83D;--text:#FFF1E6;--muted:#B7A4C2;--line:#3D2B52;--track:#100B17;--ink:#17101F;--lightink:#17101F;--light:#FFB27A;--deep:#C44A00;--deeptx:#fff;--hotink:#17101F}
+[data-palette="bright"]{color-scheme:light;--bg:#F3F6FF;--panel:#FFFFFF;--violet:#2F54FF;--coral:#F25A00;--text:#0F1540;--muted:#5A6190;--line:#D3DAF5;--track:#E3E9FF;--ink:#fff;--lightink:#0F1540;--light:#A9BBFF;--deep:#1B34C7;--deeptx:#fff;--hotink:#fff}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+h1,h2,h3{font-family:Unbounded,system-ui,sans-serif;line-height:1.1;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+section{padding:72px 0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+nav b{font-family:Unbounded,sans-serif;font-weight:700}
+nav a{text-decoration:none;color:var(--muted);margin-left:22px;font-size:15px}
+nav a:hover{color:var(--text)}
+
+/* Hero */
+.hero{padding:40px 0 56px}
+.hero h1{font-size:clamp(34px,7vw,72px);font-weight:700;max-width:14ch}
+.hero p{max-width:52ch;color:var(--muted);margin:28px 0 28px;font-size:19px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;text-decoration:none;font-weight:700;background:var(--violet);color:var(--ink);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:transparent;border:1.5px solid var(--violet);color:var(--text)}
+.btn.alt:hover{border-color:var(--coral)}
+
+/* Timeline graphic: the one orchestrated moment */
+.tl{margin-top:48px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 16px 18px;position:relative;overflow:hidden}
+.tl-row{display:flex;align-items:center;gap:10px;margin:8px 0}
+.tl-row i{font-style:normal;color:var(--muted);font-size:12px;width:26px;flex:none}
+.tl-track{position:relative;flex:1;height:34px;background:var(--track);border-radius:6px;overflow:hidden}
+.clip{position:absolute;top:3px;bottom:3px;border-radius:5px;padding:0 10px;font-size:12px;font-weight:700;display:flex;align-items:center;color:var(--ink);white-space:nowrap;overflow:hidden;transform-origin:left;animation:clipin .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--d)*1s)}
+.c1{background:var(--violet)}.c2{background:var(--light);color:var(--lightink)}.c3{background:var(--deep);color:var(--deeptx)}.c4{background:var(--coral);color:var(--hotink)}
+.wave{background:repeating-linear-gradient(90deg,var(--violet) 0 2px,transparent 2px 6px);opacity:.55;color:transparent}
+.playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--coral);left:52px;animation:sweep 8s linear 1.2s infinite;box-shadow:0 0 12px var(--coral)}
+.playhead::before{content:"";position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:9px solid var(--coral);border-bottom:0}
+@keyframes clipin{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+@keyframes sweep{from{left:52px}to{left:calc(100% - 18px)}}
+
+/* Looping reel strip */
+.reel{overflow:hidden;padding:0 0 8px}
+.reel-in{display:flex;gap:16px;width:max-content;animation:slide 40s linear infinite}
+.reel:hover .reel-in{animation-play-state:paused}
+.frame{width:300px;aspect-ratio:16/9;border-radius:12px;position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);flex:none}
+.frame video,.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.gfx{position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,var(--violet),var(--bg),var(--coral),var(--bg),var(--violet));opacity:.35;animation:spin 12s linear infinite;transform:scale(2)}
+.frame span{position:absolute;left:12px;bottom:10px;font-size:13px;color:var(--muted)}
+@keyframes slide{to{transform:translateX(calc(-50% - 8px))}}
+@keyframes spin{to{transform:scale(2) rotate(360deg)}}
+
+/* About */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.about h2,.work-h h2,.contact h2{font-size:clamp(26px,4vw,40px)}
+.about p{color:var(--muted);margin:16px 0 0}
+.big{font-family:Unbounded,sans-serif;font-size:64px;font-weight:700;color:var(--violet);line-height:1}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.chip{padding:8px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:15px}
+.chip.main{border-color:var(--violet)}
+
+/* Services */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:32px}
+.svc div{padding:22px;border-left:3px solid var(--violet);background:var(--panel);border-radius:0 12px 12px 0}
+.svc div:nth-child(even){border-left-color:var(--coral)}
+.svc h3{font-size:17px;margin-bottom:8px}
+.svc p{margin:0;color:var(--muted);font-size:15px}
+
+/* Work */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-top:32px}
+.card{text-decoration:none;display:block}
+.card .frame{width:100%}
+.card:hover .frame{border-color:var(--coral)}
+.play{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px;border-radius:50%;background:var(--coral);display:grid;place-items:center;transition:transform .2s}
+.play::after{content:"";border-left:16px solid var(--hotink);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.card:hover .play{transform:scale(1.12)}
+.card h3{font-size:16px;margin:14px 0 4px;font-family:Manrope,sans-serif;font-weight:700}
+.card p{margin:0;color:var(--muted);font-size:14px}
+
+/* Contact */
+.contact{text-align:center;border-top:1px solid var(--line)}
+.contact p{color:var(--muted);max-width:44ch;margin:14px auto 28px}
+.links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 32px}
+
+@media (max-width:760px){.about{grid-template-columns:1fr;gap:28px}.tl-row i{display:none}section{padding:52px 0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+.frame.v{aspect-ratio:9/16}
+.frame.v video{object-fit:contain;background:#000}
+.grid{grid-template-columns:repeat(2,1fr);gap:16px;grid-auto-flow:dense}
+.card.wide{grid-column:1/-1}
+.card.vc h3{font-size:15px;margin-top:12px}
+.card.vc p{font-size:13px}
+.card.vc .frame{border-radius:10px}
+.card.vc .play{width:52px;height:52px;margin:-26px}
+.card.vc .play::after{border-left-width:14px;border-top-width:9px;border-bottom-width:9px;margin-left:4px}
+.card.vc video{object-fit:cover}
+.card.wide .frame{max-width:560px}
+.reel .frame{width:170px;aspect-ratio:9/16;border-radius:14px}
+.reel .frame video,.reel .frame img{object-fit:cover}
+.reel-in{gap:14px}
+ .frame.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97)}
+.frame.playing{box-shadow:0 0 0 2px var(--violet),0 0 24px var(--violet);animation:glowslow 4s ease-in-out infinite alternate}
+.frame.playing.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97),glowslow 4s ease-in-out infinite alternate}
+@keyframes shake{0%{transform:scale(1)}25%{transform:scale(1.05)}65%{transform:scale(.99)}100%{transform:scale(1)}}
+@keyframes glowslow{from{box-shadow:0 0 0 2px var(--violet),0 0 14px var(--violet)}to{box-shadow:0 0 0 3px var(--coral),0 0 40px var(--coral)}}
+
+/* Hero cutout: translucent Apple style glass box */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero-video{width:100%;aspect-ratio:16/9;border-radius:32px;overflow:visible;position:relative;
+background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
+border:1px solid rgba(255,255,255,.14);
+backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);
+box-shadow:0 30px 80px -20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18)}
+.hero-video::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(60% 80% at 50% 100%,var(--violet),transparent 70%);opacity:.28;pointer-events:none}
+.hero-video .cutout,.hero-video img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;background:transparent;pointer-events:none}
+@media (max-width:760px){.hero-video{border-radius:22px}}
+
+/* Stand-in emoting animation (8s loop): calm, surprise, laugh, thinking */
+.standin{--t:8s}
+.standin .fig{animation:bob 2.4s ease-in-out infinite;transform-origin:320px 362px}
+.standin .head{transform-origin:320px 240px;animation:head var(--t) ease-in-out infinite}
+.standin .brows{animation:brows var(--t) ease-in-out infinite}
+.standin .eyes ellipse{transform-box:fill-box;transform-origin:center;animation:blink 4s infinite}
+.standin .arm{transform-origin:418px 300px;animation:arm var(--t) ease-in-out infinite}
+.standin .m{opacity:0}
+.m1{animation:m1 var(--t) infinite}.m2{animation:m2 var(--t) infinite}.m3{animation:m3 var(--t) infinite}.m4{animation:m4 var(--t) infinite}
+.standin .e{opacity:0;transform-box:fill-box;transform-origin:center}
+.e1{animation:pop1 var(--t) infinite}.e2{animation:pop2 var(--t) infinite}.e3{animation:pop3 var(--t) infinite}.e3.d2{animation-delay:.25s}.e3.d3{animation-delay:.5s}
+@keyframes bob{50%{transform:translateY(-4px) scale(1.01)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes head{0%{transform:rotate(0)}18%{transform:rotate(-2deg)}28%{transform:rotate(0) translateY(-5px)}42%{transform:rotate(-5deg)}52%{transform:rotate(4deg)}62%{transform:rotate(-4deg)}70%{transform:rotate(3deg)}78%,92%{transform:rotate(7deg)}100%{transform:rotate(0)}}
+@keyframes brows{0%,22%{transform:translateY(0)}27%,38%{transform:translateY(-9px)}44%,68%{transform:translateY(-3px)}76%,92%{transform:translateY(-2px) rotate(-4deg)}100%{transform:translateY(0)}}
+@keyframes arm{0%,40%{transform:rotate(0)}48%{transform:rotate(-118deg)}54%{transform:rotate(-98deg)}60%{transform:rotate(-122deg)}66%{transform:rotate(-100deg)}74%,100%{transform:rotate(0)}}
+@keyframes m1{0%,24%{opacity:1}25%,93%{opacity:0}94%,100%{opacity:1}}
+@keyframes m2{0%,24%{opacity:0}25%,39%{opacity:1}40%,100%{opacity:0}}
+@keyframes m3{0%,39%{opacity:0}40%,69%{opacity:1}70%,100%{opacity:0}}
+@keyframes m4{0%,69%{opacity:0}70%,93%{opacity:1}94%,100%{opacity:0}}
+@keyframes pop1{0%,26%{opacity:0;transform:scale(.2)}30%{opacity:1;transform:scale(1.25)}34%,38%{opacity:1;transform:scale(1)}42%,100%{opacity:0;transform:scale(.6)}}
+@keyframes pop2{0%,72%{opacity:0;transform:scale(.2) rotate(-20deg)}78%{opacity:1;transform:scale(1.2) rotate(8deg)}84%,92%{opacity:1;transform:scale(1) rotate(8deg)}96%,100%{opacity:0;transform:scale(.6)}}
+@keyframes pop3{0%,40%{opacity:0;transform:translateY(10px) scale(.3)}46%{opacity:1;transform:translateY(0) scale(1.2)}54%,64%{opacity:1;transform:translateY(-8px) scale(1)}70%,100%{opacity:0;transform:translateY(-20px) scale(.6)}}
+
+/* Rotating light sweep around the glass box */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.hero-video::after,.hv-head{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:spinring 12s linear infinite}
+.hero-video::after{padding:1px;
+background:conic-gradient(from var(--ang),transparent 0 45%,var(--violet) 82%,var(--coral) 96%,#fff 100%);
+filter:drop-shadow(0 0 3px var(--violet)) drop-shadow(0 0 10px var(--violet)) drop-shadow(0 0 26px var(--coral))}
+.hv-head{padding:2.5px;border-radius:32px;
+background:conic-gradient(from var(--ang),transparent 0 91%,var(--coral) 97%,#fff 100%);
+filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 7px var(--coral)) drop-shadow(0 0 16px var(--coral)) drop-shadow(0 0 34px var(--violet))}
+@media (max-width:760px){.hv-head{border-radius:22px}}
+@keyframes spinring{to{--ang:360deg}}
+
+/* Hero paragraph: moving color shimmer */
+.hero p{background:linear-gradient(100deg,var(--muted) 0 35%,var(--text) 47%,var(--light) 53%,var(--muted) 65% 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shimmer 6s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:100% 0}100%{background-position:-60% 0}}
+.hero .btn{animation:btnfloat 3.2s ease-in-out infinite}
+.hero .btn.alt{animation-delay:.4s}
+@keyframes btnfloat{50%{transform:translateY(-3px)}}
+
+/* "3 years": big highlighted number with light sweep */
+.big{display:inline-block;font-size:clamp(72px,12vw,110px);letter-spacing:-.02em;
+background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%) no-repeat,linear-gradient(90deg,var(--violet),var(--coral));
+background-size:250% 100%,100% 100%;background-position:150% 0,0 0;
+-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+filter:drop-shadow(0 0 18px color-mix(in srgb,var(--violet) 55%,transparent));
+animation:sweep3 3.2s ease-in-out infinite,glow3 2.4s ease-in-out infinite alternate}
+@keyframes sweep3{0%{background-position:150% 0,0 0}60%,100%{background-position:-60% 0,0 0}}
+@keyframes glow3{to{filter:drop-shadow(0 0 30px color-mix(in srgb,var(--coral) 75%,transparent))}}
+/* Play button hidden on video thumbnails (tap still plays) */
+.card .play{display:none}
 </style>
 </head>
 <body>
