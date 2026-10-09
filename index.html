@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en" data-palette="orange">
 <head>
 <meta charset="utf-8">
@@ -313,16 +313,29 @@ const VIDEOS=[
  {title:"Video title 8",tag:"Reel",url:"3.mp4",thumb:"file_00000000d8ec8210a5125cff336f3f4d.png",vertical:true},
  {title:"Video title 9",tag:"Reel",url:"SaveVid.Net_AQMNZryTio6u7QngR6Vl0ujjJT6Fd-Ykbz8g5ZhMivuQkACeDiN1USnXqeHONl5ld5nXYsWc3ILkzS9noZ4VTWMZWajZAeJ1QzJZgRA.mp4",vertical:true}
 ];
+const enc=u=>/%[0-9a-f]{2}/i.test(u)?u:encodeURI(u);
 function ytId(u){const m=u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/);return m?m[1]:null}
 document.getElementById("grid").innerHTML=VIDEOS.map(v=>{
  const id=ytId(v.url);
  const cc=v.vertical?"card vc":"card wide",vf=v.vertical?" v":"";
  const meta=`<h3>${v.title}</h3><p>${v.tag}</p>`;
- if(/\.mp4(\?|#|$)/i.test(v.url))return `<div class="${cc}"><div class="frame${vf}"><video src="${v.url}#t=0.1" controls muted playsinline preload="metadata"${v.thumb?` poster="${v.thumb}"`:""}></video></div>${meta}</div>`;
+ if(/\.mp4(\?|#|$)/i.test(v.url)){const src=enc(v.url),pv=`<video src="${src}#t=0.1" muted playsinline preload="metadata" style="pointer-events:none"></video>`;return `<div class="${cc}"><div class="frame mp${vf}" data-src="${src}" role="button" tabindex="0" aria-label="Play ${v.title}">${v.thumb?`<img src="${enc(v.thumb)}" alt="">`:pv}<div class="play"></div></div>${meta}</div>`}
  const t=v.thumb||(id?`https://img.youtube.com/vi/${id}/hqdefault.jpg`:"");
  const img=t?`<img src="${t}" alt="">`:'<div class="gfx"></div>';
  if(id)return `<div class="${cc}"><div class="frame yt${vf}" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div>${meta}</div>`;
  return `<a class="${cc}" href="${v.url}" target="_blank" rel="noopener"><div class="frame${vf}">${img}<div class="play"></div></div>${meta}</a>`}).join("");
+document.querySelectorAll(".frame.mp").forEach(f=>{
+ f.style.cursor="pointer";
+ const im=f.querySelector("img");
+ if(im)im.addEventListener("error",()=>{im.outerHTML=`<video src="${f.dataset.src}#t=0.1" muted playsinline preload="metadata" style="pointer-events:none"></video>`});
+ const go=()=>{
+  if(f.querySelector("video[controls]"))return;
+  f.innerHTML=`<video src="${f.dataset.src}" controls autoplay playsinline></video>`;
+  const v=f.querySelector("video");const p=v.play();if(p&&p.catch)p.catch(()=>{});
+ };
+ f.addEventListener("click",go);
+ f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+});
 document.querySelectorAll(".frame.yt").forEach(f=>{
  f.style.cursor="pointer";
  const go=()=>{
@@ -381,4 +394,3 @@ document.getElementById("reelIn").innerHTML=base+base;
 </script>
 </body>
 </html>
-
