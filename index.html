@@ -279,39 +279,8 @@ body::after{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opa
            hero.mov   = HEVC with alpha (Safari, iPhone, Mac)
          Put both in the same folder as this index.html.
          Or use a single PNG instead: <img src="hero.png" alt="Bhupi"> -->
-    <video class="cutout" src="port.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture style="object-fit:cover;object-position:center;border-radius:inherit"></video>
-      <!-- STAND-IN ANIMATION (preview only). When your real cutout is ready: delete this whole <svg>, then uncomment the <video> below.
-      <video class="cutout" autoplay muted loop playsinline preload="auto" disablepictureinpicture>
-        <source src="hero.mov" type='video/mp4; codecs="hvc1"'>
-        <source src="hero.webm" type="video/webm">
-      </video> -->
-      <svg class="cutout standin" viewBox="0 0 640 360" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-        <g class="fig">
-          <g class="arm"><path d="M418 300 L470 362" stroke="#C44A00" stroke-width="34" stroke-linecap="round"/><circle cx="474" cy="368" r="19" fill="#E8B48F"/></g>
-          <path d="M196 362 C196 292 248 262 320 262 C392 262 444 292 444 362Z" fill="var(--violet)"/>
-          <path d="M290 262 Q320 292 350 262" fill="none" stroke="#C44A00" stroke-width="5" stroke-linecap="round"/>
-          <rect x="302" y="222" width="36" height="46" rx="14" fill="#D9A07C"/>
-          <g class="head">
-            <ellipse cx="268" cy="180" rx="9" ry="14" fill="#E8B48F"/><ellipse cx="372" cy="180" rx="9" ry="14" fill="#E8B48F"/>
-            <ellipse cx="320" cy="176" rx="52" ry="60" fill="#E8B48F"/>
-            <path d="M266 160 C262 108 300 98 326 102 C362 98 382 126 374 160 C362 140 344 132 322 134 C298 134 276 142 266 160Z" fill="#1B1322"/>
-            <g class="brows" stroke="#1B1322" stroke-width="5" stroke-linecap="round"><path d="M290 156 L312 154"/><path d="M328 154 L350 156"/></g>
-            <g class="eyes" fill="#1B1322"><ellipse cx="300" cy="174" rx="5.5" ry="7"/><ellipse cx="340" cy="174" rx="5.5" ry="7"/></g>
-            <ellipse cx="288" cy="196" rx="9" ry="5" fill="#FF8F7A" opacity=".45"/><ellipse cx="352" cy="196" rx="9" ry="5" fill="#FF8F7A" opacity=".45"/>
-            <g class="m m1"><path d="M304 200 Q320 214 336 200" fill="none" stroke="#1B1322" stroke-width="5" stroke-linecap="round"/></g>
-            <g class="m m2"><ellipse cx="320" cy="205" rx="8" ry="10" fill="#1B1322"/></g>
-            <g class="m m3"><path d="M298 196 Q320 200 342 196 Q338 224 320 224 Q302 224 298 196Z" fill="#1B1322"/><path d="M308 214 Q320 208 332 214 Q326 222 320 222 Q314 222 308 214Z" fill="#FF6B7A"/></g>
-            <g class="m m4"><path d="M308 204 L332 204" stroke="#1B1322" stroke-width="5" stroke-linecap="round"/></g>
-          </g>
-        </g>
-        <g font-family="Unbounded,sans-serif" font-weight="700" text-anchor="middle">
-          <text class="e e1" x="428" y="128" font-size="46" fill="var(--coral)">!</text>
-          <text class="e e2" x="214" y="128" font-size="46" fill="var(--coral)">?</text>
-          <text class="e e3" x="236" y="150" font-size="34" fill="var(--coral)">&#10022;</text>
-          <text class="e e3 d2" x="412" y="108" font-size="26" fill="var(--light)">&#10022;</text>
-          <text class="e e3 d3" x="440" y="170" font-size="30" fill="var(--coral)">&#9829;</text>
-        </g>
-      </svg>
+    <div class="hero-video"><i class="hv-head"></i>
+      <video class="cutout" src="port.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture style="object-fit:cover;object-position:center;border-radius:inherit"></video>
     </div>
 
     <p>Video editor in Chennai. Three years of cutting documentaries, talking heads, story-driven videos and reels, with motion graphics that keep the pace tight.</p>
