@@ -279,7 +279,7 @@ body::after{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opa
            hero.mov   = HEVC with alpha (Safari, iPhone, Mac)
          Put both in the same folder as this index.html.
          Or use a single PNG instead: <img src="hero.png" alt="Bhupi"> -->
-    <div class="hero-video"><i class="hv-head"></i>
+    <video class="cutout" src="port.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture style="object-fit:cover;object-position:center;border-radius:inherit"></video>
       <!-- STAND-IN ANIMATION (preview only). When your real cutout is ready: delete this whole <svg>, then uncomment the <video> below.
       <video class="cutout" autoplay muted loop playsinline preload="auto" disablepictureinpicture>
         <source src="hero.mov" type='video/mp4; codecs="hvc1"'>
