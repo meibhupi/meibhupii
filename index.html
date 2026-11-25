@@ -275,6 +275,40 @@ nav b{font-size:24px;font-weight:800;letter-spacing:-.02em}
 .btn.alt{border-color:#fff;color:#fff}
 .reel .frame span{color:#fff;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.7)}
 footer{color:rgba(255,255,255,.7)}
+
+/* ===== SPEED FIXES ===== */
+body::after{display:none}                       /* full-screen noise overlay was repainting on every scroll */
+.hero-video{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,.08)}
+.blob{filter:none;will-change:transform}
+.hero-video::after{filter:drop-shadow(0 0 8px var(--coral))}
+.hv-head{filter:drop-shadow(0 0 8px var(--coral))}
+.hero p{animation:none;background:none;-webkit-text-fill-color:var(--text);color:var(--text)}
+.big{filter:none;animation:sweep3 3.6s ease-in-out infinite}
+.tl{container-type:inline-size}
+.playhead{animation:sweep2 8s linear 1.2s infinite;will-change:transform}
+@keyframes sweep2{from{transform:translateX(0)}to{transform:translateX(calc(100cqw - 70px))}}
+section{content-visibility:auto;contain-intrinsic-size:auto 700px}
+@media (max-width:760px){.blob,.ring,.dia,.tri,.squig,.plus{animation:none}.hv-head,.hero-video::after{animation-duration:20s}}
+
+/* ===== CLICK-TO-PLAY INVITATION ===== */
+.card .play{display:grid;z-index:3;animation:ripple 1.8s ease-out infinite}
+.card.vc .play{animation:ripple 1.8s ease-out infinite}
+@keyframes ripple{0%{box-shadow:0 0 0 0 rgba(255,59,48,.7)}100%{box-shadow:0 0 0 26px rgba(255,59,48,0)}}
+.frame.mp:not(.started)::before,.frame.yt:not(.started)::before{content:"\25B6  TAP TO PLAY";position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:3;background:rgba(0,0,0,.7);color:#fff;font:700 11px/1 Onest,sans-serif;letter-spacing:.1em;padding:7px 12px;border-radius:99px;white-space:nowrap;animation:nudge 2.2s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-50%) translateY(-3px)}}
+.frame.mp img,.frame.yt img{transition:transform .4s,filter .3s}
+.frame.mp:not(.started)::after,.frame.yt:not(.started)::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45));pointer-events:none}
+.card:hover .frame img{transform:scale(1.06)}
+.spin{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:rot .8s linear infinite;z-index:4;pointer-events:none}
+.hint{display:inline-flex;align-items:center;gap:10px;margin:18px 0 0;padding:10px 18px;border-radius:99px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.35);font-weight:700;font-size:15px;color:#fff}
+.hint i{width:12px;height:12px;border-radius:50%;background:var(--coral);animation:pulse 1.2s ease-in-out infinite}
+
+/* ===== Looping muted work videos ===== */
+.frame.mp::before,.frame.mp::after{display:none!important}
+.frame.mp video{pointer-events:none}
+.snd{position:absolute;left:10px;bottom:10px;z-index:3;border:0;font:700 11px/1 Onest,sans-serif;letter-spacing:.06em;color:#fff;background:rgba(0,0,0,.7);padding:8px 12px;border-radius:99px;cursor:pointer;animation:nudge2 2.2s ease-in-out infinite}
+.snd.on{background:var(--coral);animation:none}
+@keyframes nudge2{50%{transform:translateY(-3px)}}
 </style>
 </head>
 <body>
@@ -350,7 +384,7 @@ footer{color:rgba(255,255,255,.7)}
   </section>
 
   <section id="work" style="padding-top:0">
-    <div class="work-h"><h2>Videos I've edited</h2></div>
+    <div class="work-h"><h2>Videos I've edited</h2><div class="hint"><i></i>These play on loop. Tap any video to turn the sound on.</div></div>
     <div class="grid" id="grid"></div>
   </section>
 
@@ -387,29 +421,44 @@ document.getElementById("grid").innerHTML=VIDEOS.map(v=>{
  const id=ytId(v.url);
  const cc=v.vertical?"card vc":"card wide",vf=v.vertical?" v":"";
  const meta=`<h3>${v.title}</h3><p>${v.desc||v.tag}</p>`;
- if(/\.mp4(\?|#|$)/i.test(v.url)){const src=enc(v.url),pv=`<video src="${src}#t=0.1" muted playsinline preload="metadata" style="pointer-events:none"></video>`;return `<div class="${cc}"><div class="frame mp${vf}" data-src="${src}" role="button" tabindex="0" aria-label="Play ${v.title}">${v.thumb?`<img src="${enc(v.thumb)}" alt="">`:pv}<div class="play"></div></div>${meta}</div>`}
+ if(/\.mp4(\?|#|$)/i.test(v.url)){const src=enc(v.url),pv=`<video src="${src}#t=0.1" muted playsinline preload="metadata" style="pointer-events:none"></video>`;return `<div class="${cc}"><div class="frame mp${vf}" data-src="${src}" role="button" tabindex="0" aria-label="Play ${v.title}">${v.thumb?`<img src="${enc(v.thumb)}" alt="" loading="lazy" decoding="async">`:pv}<div class="play"></div></div>${meta}</div>`}
  const t=v.thumb||(id?`https://img.youtube.com/vi/${id}/hqdefault.jpg`:"");
- const img=t?`<img src="${t}" alt="">`:'<div class="gfx"></div>';
+ const img=t?`<img src="${t}" alt="" loading="lazy" decoding="async">`:'<div class="gfx"></div>';
  if(id)return `<div class="${cc}"><div class="frame yt${vf}" data-id="${id}" role="button" tabindex="0" aria-label="Play ${v.title}">${img}<div class="play"></div></div>${meta}</div>`;
  return `<a class="${cc}" href="${v.url}" target="_blank" rel="noopener"><div class="frame${vf}">${img}<div class="play"></div></div>${meta}</a>`}).join("");
 document.querySelectorAll(".frame.mp").forEach(f=>{
  f.style.cursor="pointer";
  const im=f.querySelector("img");
- if(im)im.addEventListener("error",()=>{im.outerHTML=`<video src="${f.dataset.src}#t=0.1" muted playsinline preload="metadata" style="pointer-events:none"></video>`});
- const go=()=>{
-  if(f.querySelector("video[controls]"))return;
-  f.innerHTML=`<video src="${f.dataset.src}" controls autoplay playsinline></video>`;
-  const v=f.querySelector("video");const p=v.play();if(p&&p.catch)p.catch(()=>{});
+ const poster=im?im.getAttribute("src"):"";
+ const src=f.dataset.src;
+ f.classList.add("started");
+ f.innerHTML=`<video data-loop="1" muted loop playsinline preload="none"${poster?` poster="${poster}"`:""}></video><button class="snd" type="button" aria-label="Toggle sound"></button>`;
+ const v=f.querySelector("video"),b=f.querySelector(".snd");
+ const icon=()=>{b.textContent=v.muted?"\uD83D\uDD07  TAP FOR SOUND":"\uD83D\uDD0A  SOUND ON";b.classList.toggle("on",!v.muted)};
+ icon();
+ v.addEventListener("mutechg",icon);
+ const muteOthers=()=>document.querySelectorAll(".frame.mp video").forEach(x=>{if(x!==v&&!x.muted){x.muted=true;x.dispatchEvent(new Event("mutechg"))}});
+ const toggle=()=>{
+  if(v.muted){muteOthers();v.muted=false;const p=v.play();if(p&&p.catch)p.catch(()=>{v.muted=true;icon()})}
+  else v.muted=true;
+  icon();
  };
- f.addEventListener("click",go);
- f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+ f.addEventListener("click",toggle);
+ f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle()}});
+ const start=()=>{if(!v.getAttribute("src")){v.preload="auto";v.src=src}const p=v.play();if(p&&p.catch)p.catch(()=>{})};
+ if("IntersectionObserver" in window){
+  new IntersectionObserver(es=>es.forEach(e=>{
+   if(e.isIntersecting)start();
+   else{v.pause();if(!v.muted){v.muted=true;icon()}}
+  }),{rootMargin:"200px 0px"}).observe(f);
+ }else start();
 });
 document.querySelectorAll(".frame.yt").forEach(f=>{
  f.style.cursor="pointer";
  const go=()=>{
   const o=location.protocol.indexOf("http")===0?"&origin="+encodeURIComponent(location.origin):"";
   f.innerHTML=`<iframe src="https://www.youtube.com/embed/${f.dataset.id}?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1${o}" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>`;
-  const fr=f.querySelector("iframe");
+  f.classList.add("started");const fr=f.querySelector("iframe");const sp=document.createElement("div");sp.className="spin";f.appendChild(sp);fr.addEventListener("load",()=>sp.remove());
   fr.addEventListener("load",()=>fr.contentWindow.postMessage(JSON.stringify({event:"listening",id:1}),"*"));
   if(window.vidStarted)window.vidStarted(f);
  };
@@ -424,7 +473,7 @@ f.addEventListener("click",go);
  function pauseOthers(except){
   grid.querySelectorAll(".frame").forEach(f=>{
    if(f===except)return;
-   const v=f.querySelector("video");if(v&&!v.paused)v.pause();
+   const v=f.querySelector("video");if(v&&!v.paused&&!v.dataset.loop)v.pause();
    ytCmd(f,"pauseVideo");
    f.classList.remove("playing");
   });
@@ -432,9 +481,9 @@ f.addEventListener("click",go);
  function started(f){const was=f.classList.contains("playing");pauseOthers(f);f.classList.add("playing");if(!was)shake(f)}
  function stopped(f){f.classList.remove("playing")}
  window.vidStarted=started;
- grid.addEventListener("play",e=>{if(e.target.tagName==="VIDEO")started(frameOf(e.target))},true);
- grid.addEventListener("pause",e=>{if(e.target.tagName==="VIDEO")stopped(frameOf(e.target))},true);
- grid.addEventListener("ended",e=>{if(e.target.tagName==="VIDEO")stopped(frameOf(e.target))},true);
+ grid.addEventListener("play",e=>{if(e.target.tagName==="VIDEO"&&!e.target.dataset.loop)started(frameOf(e.target))},true);
+ grid.addEventListener("pause",e=>{if(e.target.tagName==="VIDEO"&&!e.target.dataset.loop)stopped(frameOf(e.target))},true);
+ grid.addEventListener("ended",e=>{if(e.target.tagName==="VIDEO"&&!e.target.dataset.loop)stopped(frameOf(e.target))},true);
  grid.addEventListener("animationend",e=>{if(e.animationName==="shake")e.target.classList.remove("shake")},true);
  window.addEventListener("message",e=>{
   if(typeof e.data!=="string"||e.origin.indexOf("youtube")<0)return;
@@ -471,9 +520,14 @@ document.getElementById("reelIn").innerHTML=base+base;
  let done=false;
  function startReel(){
   if(done)return;done=true;
-  document.querySelectorAll("#reelIn video[data-src]").forEach(v=>{v.src=v.dataset.src;v.removeAttribute("data-src");v.preload="metadata";const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{})});
+  const vids=document.querySelectorAll("#reelIn video[data-src]");
+  const load=v=>{if(v.dataset.src){v.src=v.dataset.src;v.removeAttribute("data-src");v.preload="metadata"}const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{})};
+  if(!("IntersectionObserver" in window)){vids.forEach(load);return}
+  // Only load/play reel clips that are on screen; pause the rest
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)load(e.target);else e.target.pause()}),{rootMargin:"0px 150px"});
+  vids.forEach(v=>io.observe(v));
  }
- if(hero&&hero.readyState<3){hero.addEventListener("playing",()=>setTimeout(startReel,300),{once:true});setTimeout(startReel,4000)}
+ if(hero&&hero.readyState<3){hero.addEventListener("playing",()=>setTimeout(startReel,300),{once:true});setTimeout(startReel,2500)}
  else startReel();
  if(hero){const pr=hero.play();if(pr&&pr.catch)pr.catch(()=>{})}
 })();
